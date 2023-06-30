@@ -9,8 +9,8 @@ use OpenApi\Annotations as OA;
  * @OA\Post(
  *      path="/api/v1/vehicles/",
  *      tags={"Vehicles"},
- *      summary="Create new vehicle",
- *      description="Create new vehicle",
+ *      summary="Create a new vehicle",
+ *      description="Create a new vehicle",
  *      @OA\RequestBody(
  *         @OA\MediaType(
  *             mediaType="application/json",
@@ -232,6 +232,31 @@ use OpenApi\Annotations as OA;
  *                   ref="#/components/schemas/VehicleResource"
  *               ),
  *           )
+ *       ),
+ *      @OA\Response(
+ *           response=404,
+ *           description="Not found"
+ *      ),
+ * )
+ *
+ * @OA\Delete(
+ *      path="/api/v1/vehicles/{id}",
+ *      tags={"Vehicles"},
+ *      summary="Delete a vehicle",
+ *      description="Delete a vehicle",
+ *      @OA\Parameter(
+ *          name="id",
+ *          description="Vehicle id",
+ *          required=true,
+ *          example=1,
+ *          in="path",
+ *          @OA\Schema(
+ *              type="integer"
+ *          )
+ *      ),
+ *      @OA\Response(
+ *           response=204,
+ *           description="Successful operation",
  *       ),
  *      @OA\Response(
  *           response=404,

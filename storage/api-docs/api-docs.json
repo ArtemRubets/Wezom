@@ -223,8 +223,8 @@
                 "tags": [
                     "Vehicles"
                 ],
-                "summary": "Create new vehicle",
-                "description": "Create new vehicle",
+                "summary": "Create a new vehicle",
+                "description": "Create a new vehicle",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -307,6 +307,33 @@
                                 }
                             }
                         }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Vehicles"
+                ],
+                "summary": "Delete a vehicle",
+                "description": "Delete a vehicle",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Vehicle id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful operation"
                     },
                     "404": {
                         "description": "Not found"
