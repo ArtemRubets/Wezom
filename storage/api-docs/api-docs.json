@@ -1,0 +1,125 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Wezom Test API documentation",
+        "description": "Wezom Test API documentation",
+        "contact": {
+            "email": "artemrubets27@gmail.com"
+        },
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/v1": {},
+        "/api/v1/vehicles/": {
+            "post": {
+                "tags": [
+                    "Vehicles"
+                ],
+                "summary": "Create new vehicle",
+                "description": "Create new vehicle",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "state_number": {
+                                        "type": "string"
+                                    },
+                                    "color": {
+                                        "type": "string"
+                                    },
+                                    "vin_code": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "name": "Brad",
+                                    "state_number": "BM4632BX",
+                                    "color": "black",
+                                    "vin_code": "3VWDP7AJ7DM356782"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/VehicleResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "VehicleResource": {
+                "title": "VehicleResource",
+                "description": "Vehicle Resource",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Martin"
+                    },
+                    "state_number": {
+                        "type": "string",
+                        "example": "BM4632BX"
+                    },
+                    "color": {
+                        "type": "string",
+                        "example": "white"
+                    },
+                    "vin_code": {
+                        "type": "string",
+                        "example": "3VWDP7AJ7DM356782"
+                    },
+                    "model": {
+                        "type": "string",
+                        "example": "Jetta"
+                    },
+                    "brand": {
+                        "type": "string",
+                        "example": "VOLKSWAGEN"
+                    },
+                    "year": {
+                        "type": "integer",
+                        "example": 2013
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-06-30T06:02:52.000000Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-06-30T06:02:52.000000Z"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "VehicleResource"
+                }
+            }
+        }
+    }
+}
