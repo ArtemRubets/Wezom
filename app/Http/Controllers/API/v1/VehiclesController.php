@@ -11,7 +11,9 @@ use App\Services\VehicleService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
 
 class VehiclesController extends Controller
 {
@@ -73,8 +75,10 @@ class VehiclesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Vehicle $vehicle): HttpResponse
     {
-        //
+        $vehicle->delete();
+
+        return Response::noContent();
     }
 }
