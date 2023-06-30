@@ -4,9 +4,13 @@ namespace App\Http\Controllers\API\v1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\v1\VehicleRequest;
+use App\Http\Resources\v1\VehicleCollection;
 use App\Http\Resources\v1\VehicleResource;
+use App\Models\Vehicle;
 use App\Services\VehicleService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Facades\DB;
 
 class VehiclesController extends Controller
@@ -18,15 +22,19 @@ class VehiclesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request): ResourceCollection
     {
-        //
+        $vehicles = Vehicle::query()->filtered($request)->sorted($request);
+
+        $vehicles = $vehicles->paginate(10)->withQueryString();
+
+        return new VehicleCollection($vehicles);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(VehicleRequest $request)
+    public function store(VehicleRequest $request): JsonResource
     {
         $validated = $request->validated();
 
