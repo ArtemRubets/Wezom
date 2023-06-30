@@ -23,7 +23,7 @@ class VehicleRequest extends FormRequest
     {
         return [
             'name' => ['required'],
-            'state_number' => ['required'],
+            'state_number' => ['required', 'unique:vehicles,state_number'],
             'color' => ['required'],
             'vin_code' => ['required'],
         ];

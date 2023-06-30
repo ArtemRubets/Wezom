@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\VehicleAPIService;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -21,5 +22,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Schema::defaultStringLength(191);
+
+        $this->app->singleton(
+            VehicleAPIService::class,
+            fn () => new VehicleAPIService(
+                (string) config('services.vehicles-api.url'),
+            ),
+        );
     }
 }

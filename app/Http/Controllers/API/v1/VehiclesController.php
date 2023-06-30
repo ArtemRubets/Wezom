@@ -5,12 +5,16 @@ namespace App\Http\Controllers\API\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\v1\VehicleRequest;
 use App\Http\Resources\v1\VehicleResource;
-use App\Models\Vehicle;
+use App\Services\VehicleService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class VehiclesController extends Controller
 {
+    public function __construct(
+        private VehicleService $vehicleService,
+    ){}
+
     /**
      * Display a listing of the resource.
      */
@@ -24,14 +28,12 @@ class VehiclesController extends Controller
      */
     public function store(VehicleRequest $request)
     {
-        $data = $request->validated();
-
-        dd($data);
+        $validated = $request->validated();
 
         DB::beginTransaction();
 
         try {
-            $vehicle = Vehicle::create($data);
+            $vehicle = $this->vehicleService->storeVehicle($validated);
 
             DB::commit();
 
