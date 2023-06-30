@@ -208,6 +208,36 @@ use OpenApi\Annotations as OA;
  *           )
  *       )
  * )
+ *
+ * @OA\Get(
+ *      path="/api/v1/vehicles/{id}",
+ *      tags={"Vehicles"},
+ *      summary="Get vehicle data",
+ *      description="Get vehicle data",
+ *      @OA\Parameter(
+ *          name="id",
+ *          description="Vehicle id",
+ *          required=true,
+ *          example=1,
+ *          in="path",
+ *          @OA\Schema(
+ *              type="integer"
+ *          )
+ *      ),
+ *      @OA\Response(
+ *           response=200,
+ *           description="Successful operation",
+ *           @OA\JsonContent(
+ *               @OA\Property(property="data", type="object",
+ *                   ref="#/components/schemas/VehicleResource"
+ *               ),
+ *           )
+ *       ),
+ *      @OA\Response(
+ *           response=404,
+ *           description="Not found"
+ *      ),
+ * )
  */
 
 class VehiclesController

@@ -22,6 +22,10 @@ class Vehicle extends Model
         'year',
     ];
 
+    protected $casts = [
+        'year' => 'integer'
+    ];
+
     public function scopeFiltered(Builder $query, Request $request): void
     {
         $query->when($request->brand, function (Builder $query) use ($request) {
