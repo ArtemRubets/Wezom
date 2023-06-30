@@ -11,6 +11,214 @@
     "paths": {
         "/api/v1": {},
         "/api/v1/vehicles/": {
+            "get": {
+                "tags": [
+                    "Vehicles"
+                ],
+                "summary": "Get a list of vehicles",
+                "description": "Get a list of vehicles",
+                "parameters": [
+                    {
+                        "name": "brand",
+                        "in": "query",
+                        "description": "Filter by Brand",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "Ford"
+                    },
+                    {
+                        "name": "model",
+                        "in": "query",
+                        "description": "Filter by Model",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "Fusion"
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "description": "Filter by Model year",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 2017
+                    },
+                    {
+                        "name": "sort_by",
+                        "in": "query",
+                        "description": "Colunm for sorting",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "brand",
+                                "model",
+                                "year",
+                                "state_number",
+                                "vin_code",
+                                "name",
+                                "color",
+                                "created_at",
+                                "updated_at"
+                            ]
+                        },
+                        "example": "year"
+                    },
+                    {
+                        "name": "sort_order",
+                        "in": "query",
+                        "description": "Sort direction",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "asc",
+                                "desc"
+                            ]
+                        },
+                        "example": "desc"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/VehicleResource"
+                                        },
+                                        "links": {
+                                            "properties": {
+                                                "first": {
+                                                    "type": "string"
+                                                },
+                                                "last": {
+                                                    "type": "string"
+                                                },
+                                                "prev": {
+                                                    "type": "string",
+                                                    "nullable": true
+                                                },
+                                                "next": {
+                                                    "type": "string",
+                                                    "nullable": true
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "meta": {
+                                            "properties": {
+                                                "current_page": {
+                                                    "type": "integer"
+                                                },
+                                                "from": {
+                                                    "type": "integer"
+                                                },
+                                                "last_page": {
+                                                    "type": "integer"
+                                                },
+                                                "links": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "url": {
+                                                                "type": "string",
+                                                                "nullable": true
+                                                            },
+                                                            "label": {
+                                                                "type": "string"
+                                                            },
+                                                            "active": {
+                                                                "type": "boolean"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "path": {
+                                                    "type": "string"
+                                                },
+                                                "per_page": {
+                                                    "type": "integer"
+                                                },
+                                                "to": {
+                                                    "type": "integer"
+                                                },
+                                                "total": {
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "data": [
+                                        {
+                                            "name": "Brad",
+                                            "state_number": "BM3452BX",
+                                            "color": "black",
+                                            "vin_code": "3FA6P0VP1HR282209",
+                                            "model": "Fusion",
+                                            "brand": "FORD",
+                                            "year": "2017"
+                                        },
+                                        {
+                                            "name": "Brad",
+                                            "state_number": "BM3X",
+                                            "color": "black",
+                                            "vin_code": "3VWDP7AJ7DM356782",
+                                            "model": "Jetta",
+                                            "brand": "VOLKSWAGEN",
+                                            "year": "2013"
+                                        }
+                                    ],
+                                    "links": {
+                                        "first": "http://127.0.0.1/api/v1/vehicles?page=1",
+                                        "last": "http://127.0.0.1/api/v1/vehicles?page=1",
+                                        "prev": null,
+                                        "next": null
+                                    },
+                                    "meta": {
+                                        "current_page": 1,
+                                        "from": 1,
+                                        "last_page": 1,
+                                        "links": [
+                                            {
+                                                "url": null,
+                                                "label": "&laquo; Previous",
+                                                "active": false
+                                            },
+                                            {
+                                                "url": "http://127.0.0.1/api/v1/vehicles?page=1",
+                                                "label": "1",
+                                                "active": true
+                                            },
+                                            {
+                                                "url": null,
+                                                "label": "Next &raquo;",
+                                                "active": false
+                                            }
+                                        ],
+                                        "path": "http://127.0.0.1/api/v1/vehicles",
+                                        "per_page": 10,
+                                        "to": 3,
+                                        "total": 3
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "post": {
                 "tags": [
                     "Vehicles"
@@ -47,7 +255,7 @@
                     }
                 },
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "Successful operation",
                         "content": {
                             "application/json": {
