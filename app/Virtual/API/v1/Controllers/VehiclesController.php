@@ -97,6 +97,16 @@ use OpenApi\Annotations as OA;
  *                }
  *            )
  *      ),
+ *      @OA\Parameter(
+ *            name="search",
+ *            description="Search string",
+ *            required=false,
+ *            example="3FA6P0VP1HR282209",
+ *            in="query",
+ *            @OA\Schema(
+ *                type="string"
+ *            )
+ *       ),
  *      @OA\Response(
  *           response=200,
  *           description="Successful operation",

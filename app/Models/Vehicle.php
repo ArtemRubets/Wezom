@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Laravel\Scout\Attributes\SearchUsingFullText;
+use Laravel\Scout\Attributes\SearchUsingPrefix;
+use Laravel\Scout\Searchable;
 
 class Vehicle extends Model
 {
-    use HasFactory;
+    use HasFactory, Searchable;
 
     protected $fillable = [
         'name',
@@ -46,5 +49,21 @@ class Vehicle extends Model
 
             $query->orderBy($request->sort_by, $sortOrder);
         });
+    }
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array<string, mixed>
+     */
+    #[SearchUsingFullText(['state_number', 'vin_code'])]
+    #[SearchUsingPrefix(['name'])]
+    public function toSearchableArray(): array
+    {
+        return [
+            'name' => $this->name,
+            'state_number' => $this->state_number,
+            'vin_code' => $this->vin_code,
+        ];
     }
 }

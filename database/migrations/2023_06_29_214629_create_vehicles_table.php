@@ -21,6 +21,10 @@ return new class extends Migration
             $table->string('brand');
             $table->year('year')->nullable();
             $table->timestamps();
+
+            $table->fullText('name');
+            $table->fullText('state_number');
+            $table->fullText('vin_code');
         });
     }
 

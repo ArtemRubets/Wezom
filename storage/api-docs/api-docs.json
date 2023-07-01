@@ -82,6 +82,16 @@
                             ]
                         },
                         "example": "desc"
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Search string",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "3FA6P0VP1HR282209"
                     }
                 ],
                 "responses": {
