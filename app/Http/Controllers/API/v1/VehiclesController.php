@@ -67,9 +67,24 @@ class VehiclesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(VehicleRequest $request, Vehicle $vehicle): JsonResource
     {
-        //
+        $validated = $request->validated();
+
+        DB::beginTransaction();
+
+        try {
+            $vehicle = $this->vehicleService->updateVehicle($vehicle, $validated);
+
+            DB::commit();
+
+            return new VehicleResource($vehicle);
+
+        } catch (\Exception $exception) {
+            DB::rollBack();
+
+            throw $exception;
+        }
     }
 
     /**

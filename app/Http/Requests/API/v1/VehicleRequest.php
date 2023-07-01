@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\API\v1;
 
+use App\Rules\DecodeVin;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class VehicleRequest extends FormRequest
 {
@@ -21,11 +23,16 @@ class VehicleRequest extends FormRequest
      */
     public function rules(): array
     {
+        $uniqueRule = Rule::unique('vehicles', 'state_number');
+
         return [
             'name' => ['required'],
-            'state_number' => ['required', 'unique:vehicles,state_number'],
+            'state_number' => [
+                'required',
+                $this->isMethod('PATCH') ? $uniqueRule->ignore($this->route('vehicle')) : $uniqueRule
+            ],
             'color' => ['required'],
-            'vin_code' => ['required'],
+            'vin_code' => ['required', new DecodeVin],
         ];
     }
 }

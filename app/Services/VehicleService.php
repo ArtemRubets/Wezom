@@ -19,4 +19,21 @@ class VehicleService
 
         return Vehicle::create($mergedData);
     }
+
+    public function updateVehicle(Vehicle $vehicle, array $data): Vehicle
+    {
+        $dto = [];
+
+        if ($vehicle->vin_code !== $data['vin_code']){
+            $vehicleByVIN = $this->vehicleAPIService->decodeVIN($data['vin_code']);
+
+            $dto = VehicleByVinDTO::toArray($vehicleByVIN);
+        }
+
+        $mergedData = array_merge($data, $dto);
+
+        return tap($vehicle, function () use ($mergedData, $vehicle){
+            $vehicle->update($mergedData);
+        });
+    }
 }
