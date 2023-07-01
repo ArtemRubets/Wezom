@@ -8,9 +8,7 @@ use OpenApi\Annotations as OA;
  * @OA\Schema(
  *      title="VehicleResource",
  *      description="Vehicle Resource",
- *      @OA\Xml(
- *          name="VehicleResource"
- *      )
+ *      schema="VehicleResource",
  *  )
  *
  *

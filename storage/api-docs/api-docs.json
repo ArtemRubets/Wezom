@@ -226,30 +226,11 @@
                 "summary": "Create a new vehicle",
                 "description": "Create a new vehicle",
                 "requestBody": {
+                    "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "properties": {
-                                    "name": {
-                                        "type": "string"
-                                    },
-                                    "state_number": {
-                                        "type": "string"
-                                    },
-                                    "color": {
-                                        "type": "string"
-                                    },
-                                    "vin_code": {
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object",
-                                "example": {
-                                    "name": "Brad",
-                                    "state_number": "BM4632BX",
-                                    "color": "black",
-                                    "vin_code": "3VWDP7AJ7DM356782"
-                                }
+                                "$ref": "#/components/schemas/VehicleInput"
                             }
                         }
                     }
@@ -339,11 +320,90 @@
                         "description": "Not found"
                     }
                 }
+            },
+            "patch": {
+                "tags": [
+                    "Vehicles"
+                ],
+                "summary": "Update the vehicle",
+                "description": "Update the vehicle",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Vehicle id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/VehicleInput"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/VehicleResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
             }
         }
     },
     "components": {
         "schemas": {
+            "VehicleInput": {
+                "title": "Vehicle Input",
+                "required": [
+                    "name",
+                    "state_number",
+                    "color",
+                    "vin_code"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "state_number": {
+                        "type": "string"
+                    },
+                    "color": {
+                        "type": "string"
+                    },
+                    "vin_code": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "example": {
+                    "name": "Brad",
+                    "state_number": "BM4632BX",
+                    "color": "black",
+                    "vin_code": "3VWDP7AJ7DM356782"
+                }
+            },
             "VehicleResource": {
                 "title": "VehicleResource",
                 "description": "Vehicle Resource",
@@ -391,10 +451,7 @@
                         "example": "2023-06-30T06:02:52.000000Z"
                     }
                 },
-                "type": "object",
-                "xml": {
-                    "name": "VehicleResource"
-                }
+                "type": "object"
             }
         }
     }

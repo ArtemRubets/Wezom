@@ -12,42 +12,17 @@ use OpenApi\Annotations as OA;
  *      summary="Create a new vehicle",
  *      description="Create a new vehicle",
  *      @OA\RequestBody(
- *         @OA\MediaType(
- *             mediaType="application/json",
- *             @OA\Schema(
- *                 @OA\Property(
- *                     property="name",
- *                     type="string"
- *                 ),
- *                 @OA\Property(
- *                     property="state_number",
- *                     type="string"
- *                 ),
- *                  @OA\Property(
- *                     property="color",
- *                     type="string"
- *                 ),
- *                 @OA\Property(
- *                     property="vin_code",
- *                     type="string"
- *                 ),
- *                 example={
- *                      "name": "Brad",
- *                      "state_number": "BM4632BX",
- *                      "color": "black",
- *                      "vin_code": "3VWDP7AJ7DM356782",
- *                 }
- *             )
- *         )
- *     ),
- *     @OA\Response(
- *          response=201,
- *          description="Successful operation",
- *          @OA\JsonContent(
- *              @OA\Property(property="data", type="object",
- *                  ref="#/components/schemas/VehicleResource"
- *              ),
- *          )
+ *          required=true,
+ *          @OA\JsonContent(ref="#/components/schemas/VehicleInput")
+ *      ),
+ *      @OA\Response(
+ *           response=201,
+ *           description="Successful operation",
+ *           @OA\JsonContent(
+ *               @OA\Property(property="data", type="object",
+ *                   ref="#/components/schemas/VehicleResource"
+ *               ),
+ *           )
  *      )
  * )
  *
@@ -263,6 +238,41 @@ use OpenApi\Annotations as OA;
  *           description="Not found"
  *      ),
  * )
+ *
+ * @OA\Patch(
+ *      path="/api/v1/vehicles/{id}",
+ *      tags={"Vehicles"},
+ *      summary="Update the vehicle",
+ *      description="Update the vehicle",
+ *      @OA\Parameter(
+ *           name="id",
+ *           description="Vehicle id",
+ *           required=true,
+ *           example=1,
+ *           in="path",
+ *           @OA\Schema(
+ *               type="integer"
+ *           )
+ *       ),
+ *      @OA\RequestBody(
+ *          required=true,
+ *          @OA\JsonContent(ref="#/components/schemas/VehicleInput")
+ *     ),
+ *     @OA\Response(
+ *          response=201,
+ *          description="Successful operation",
+ *          @OA\JsonContent(
+ *              @OA\Property(property="data", type="object",
+ *                  ref="#/components/schemas/VehicleResource"
+ *              ),
+ *          )
+ *      ),
+ *     @OA\Response(
+ *           response=404,
+ *           description="Not found"
+ *      ),
+ * )
+ *
  */
 
 class VehiclesController
