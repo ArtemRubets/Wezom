@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\DataTransfers\API\v1\VehicleByVinDTO;
 use App\Models\Vehicle;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 
 class VehicleService
 {
@@ -35,5 +37,19 @@ class VehicleService
         return tap($vehicle, function () use ($mergedData, $vehicle){
             $vehicle->update($mergedData);
         });
+    }
+
+    public function getSortedAndFilteredVehicles(Request $request)
+    {
+        if ($request->filled('search')){
+            $vehicles = Vehicle::search($request->search)
+                ->query(function (Builder $query) use ($request) {
+                    $query->filtered($request)->sorted($request);
+                });
+        }else{
+            $vehicles = Vehicle::query()->filtered($request)->sorted($request);
+        }
+
+        return $vehicles;
     }
 }

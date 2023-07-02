@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\v1\ExportController;
 use App\Http\Controllers\API\v1\VehiclesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('vehicles', VehiclesController::class);
+Route::get('export/vehicles', [ExportController::class, 'exportVehicles']);

@@ -8,7 +8,6 @@ use App\Http\Resources\v1\VehicleCollection;
 use App\Http\Resources\v1\VehicleResource;
 use App\Models\Vehicle;
 use App\Services\VehicleService;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
@@ -27,17 +26,8 @@ class VehiclesController extends Controller
      */
     public function index(Request $request): ResourceCollection
     {
-
-        if ($request->filled('search')){
-            $vehicles = Vehicle::search($request->search)
-                ->query(function (Builder $query) use ($request) {
-                    $query->filtered($request)->sorted($request);
-                });
-        }else{
-            $vehicles = Vehicle::query()->filtered($request)->sorted($request);
-        }
-
-        $vehicles = $vehicles->paginate(10)->withQueryString();
+        $vehicles = $this->vehicleService->getSortedAndFilteredVehicles($request)
+            ->paginate(10)->withQueryString();
 
         return new VehicleCollection($vehicles);
     }
