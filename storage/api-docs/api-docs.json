@@ -380,6 +380,120 @@
                     }
                 }
             }
+        },
+        "/api/v1/export/vehicles": {
+            "get": {
+                "tags": [
+                    "Export"
+                ],
+                "summary": "Export all vehicles",
+                "description": "Export all vehicles",
+                "parameters": [
+                    {
+                        "name": "brand",
+                        "in": "query",
+                        "description": "Filter by Brand",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "Ford"
+                    },
+                    {
+                        "name": "model",
+                        "in": "query",
+                        "description": "Filter by Model",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "Fusion"
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "description": "Filter by Model year",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 2017
+                    },
+                    {
+                        "name": "sort_by",
+                        "in": "query",
+                        "description": "Colunm for sorting",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "brand",
+                                "model",
+                                "year",
+                                "state_number",
+                                "vin_code",
+                                "name",
+                                "color",
+                                "created_at",
+                                "updated_at"
+                            ]
+                        },
+                        "example": "year"
+                    },
+                    {
+                        "name": "sort_order",
+                        "in": "query",
+                        "description": "Sort direction",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "asc",
+                                "desc"
+                            ]
+                        },
+                        "example": "desc"
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Search string",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "3FA6P0VP1HR282209"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "headers": {
+                            "Content-Disposition": {
+                                "description": "attachment; filename=vehicles.xls",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "application/vnd.ms-excel",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/vnd.ms-excel": {
+                                "schema": {
+                                    "type": "string",
+                                    "format": "binary"
+                                },
+                                "example": "...(binary data)..."
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {

@@ -283,6 +283,115 @@ use OpenApi\Annotations as OA;
  *      ),
  * )
  *
+ *
+ * @OA\Get(
+ *      path="/api/v1/export/vehicles",
+ *      tags={"Export"},
+ *      summary="Export all vehicles",
+ *      description="Export all vehicles",
+ *      @OA\Parameter(
+ *          name="brand",
+ *          description="Filter by Brand",
+ *          required=false,
+ *          example="Ford",
+ *          in="query",
+ *          @OA\Schema(
+ *              type="string"
+ *          )
+ *      ),
+ *      @OA\Parameter(
+ *           name="model",
+ *           description="Filter by Model",
+ *           required=false,
+ *           example="Fusion",
+ *           in="query",
+ *           @OA\Schema(
+ *               type="string"
+ *           )
+ *      ),
+ *      @OA\Parameter(
+ *           name="year",
+ *           description="Filter by Model year",
+ *           required=false,
+ *           example=2017,
+ *           in="query",
+ *           @OA\Schema(
+ *               type="integer"
+ *           )
+ *      ),
+ *      @OA\Parameter(
+ *            name="sort_by",
+ *            description="Colunm for sorting",
+ *            required=false,
+ *            example="year",
+ *            in="query",
+ *            @OA\Schema(
+ *                type="string",
+ *                enum={
+ *                      "brand",
+ *                      "model",
+ *                      "year",
+ *                      "state_number",
+ *                      "vin_code",
+ *                      "name",
+ *                      "color",
+ *                      "created_at",
+ *                      "updated_at"
+ *                }
+ *            )
+ *      ),
+ *      @OA\Parameter(
+ *            name="sort_order",
+ *            description="Sort direction",
+ *            required=false,
+ *            example="desc",
+ *            in="query",
+ *            @OA\Schema(
+ *                type="string",
+ *                enum={
+ *                      "asc",
+ *                      "desc",
+ *                }
+ *            )
+ *      ),
+ *      @OA\Parameter(
+ *            name="search",
+ *            description="Search string",
+ *            required=false,
+ *            example="3FA6P0VP1HR282209",
+ *            in="query",
+ *            @OA\Schema(
+ *                type="string"
+ *            )
+ *       ),
+ *      @OA\Response(
+ *          response=200,
+ *          description="Success",
+ *          @OA\MediaType(
+ *              mediaType="application/vnd.ms-excel",
+ *              @OA\Schema(
+ *                  type="string",
+ *                  format="binary"
+ *              ),
+ *              example="...(binary data)..."
+ *          ),
+ *          @OA\Header(
+ *              header="Content-Disposition",
+ *              description="attachment; filename=vehicles.xls",
+ *              @OA\Schema(
+ *                  type="string"
+ *              )
+ *          ),
+ *          @OA\Header(
+ *              header="Content-Type",
+ *              description="application/vnd.ms-excel",
+ *              @OA\Schema(
+ *                  type="string"
+ *              )
+ *          ),
+ *      ),
+ * )
+ *
  */
 
 class VehiclesController
