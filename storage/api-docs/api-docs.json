@@ -494,6 +494,77 @@
                     }
                 }
             }
+        },
+        "/api/v1/vehicles/get-models-by-mark-id/{mark_id}": {
+            "get": {
+                "tags": [
+                    "Vehicles"
+                ],
+                "summary": "Get models by brand id",
+                "description": "Get models by brand id",
+                "parameters": [
+                    {
+                        "name": "mark_id",
+                        "in": "path",
+                        "description": "Brand id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1288
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "Make_ID": {
+                                                        "type": "integer"
+                                                    },
+                                                    "Make_Name": {
+                                                        "type": "string"
+                                                    },
+                                                    "Model_ID": {
+                                                        "type": "integer"
+                                                    },
+                                                    "Model_Name": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "data": [
+                                        {
+                                            "Make_ID": 1288,
+                                            "Make_Name": "AAS",
+                                            "Model_ID": 4613,
+                                            "Model_Name": "Trophy Edition"
+                                        },
+                                        {
+                                            "Make_ID": 1288,
+                                            "Make_Name": "AAS",
+                                            "Model_ID": 4614,
+                                            "Model_Name": "Sport Edition"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {

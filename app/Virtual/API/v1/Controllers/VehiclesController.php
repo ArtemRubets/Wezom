@@ -392,6 +392,53 @@ use OpenApi\Annotations as OA;
  *      ),
  * )
  *
+ *  * @OA\Get(
+ *      path="/api/v1/vehicles/get-models-by-mark-id/{mark_id}",
+ *      tags={"Vehicles"},
+ *      summary="Get models by brand id",
+ *      description="Get models by brand id",
+ *      @OA\Parameter(
+ *          name="mark_id",
+ *          description="Brand id",
+ *          required=true,
+ *          example=1288,
+ *          in="path",
+ *          @OA\Schema(
+ *              type="integer"
+ *          )
+ *      ),
+ *      @OA\Response(
+ *           response=200,
+ *           description="Successful operation",
+ *           @OA\JsonContent(
+ *               @OA\Property(property="data", type="array",
+ *                   @OA\Items(
+ *                          @OA\Property(property="Make_ID", type="integer"),
+ *                          @OA\Property(property="Make_Name", type="string"),
+ *                          @OA\Property(property="Model_ID", type="integer"),
+ *                          @OA\Property(property="Model_Name", type="string")
+ *                      )
+ *               ),
+ *              example={
+ *                  "data": {
+ *                      {
+ *                          "Make_ID": 1288,
+ *                          "Make_Name": "AAS",
+ *                          "Model_ID": 4613,
+ *                          "Model_Name": "Trophy Edition"
+ *                      },
+ *                      {
+ *                          "Make_ID": 1288,
+ *                          "Make_Name": "AAS",
+ *                          "Model_ID": 4614,
+ *                          "Model_Name": "Sport Edition"
+ *                      },
+ *                  }
+ *              }
+ *           )
+ *       ),
+ * )
+ *
  */
 
 class VehiclesController
