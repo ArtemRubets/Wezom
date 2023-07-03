@@ -21,4 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('vehicles', VehiclesController::class);
-Route::get('export/vehicles', [ExportController::class, 'exportVehicles']);
+Route::get('export/vehicles', [ExportController::class, 'exportVehicles'])->name('export.vehicles');
+Route::get('vehicles/get-models-by-mark-id/{mark_id}', [VehiclesController::class, 'getModelsByMarkId'])->name('vehicles.get-models-by-mark-id');

@@ -6,6 +6,7 @@ use App\DataTransfers\API\v1\VehicleByVinDTO;
 use App\Models\Vehicle;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class VehicleService
 {
@@ -51,5 +52,10 @@ class VehicleService
         }
 
         return $vehicles;
+    }
+
+    public function getModelsByMarkId(int $markId): Collection
+    {
+        return collect($this->vehicleAPIService->getAllModelsByBrandId($markId)['Results']);
     }
 }

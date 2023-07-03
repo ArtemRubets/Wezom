@@ -95,4 +95,13 @@ class VehiclesController extends Controller
 
         return Response::noContent();
     }
+
+    public function getModelsByMarkId(int $markId)
+    {
+        $modelsList = $this->vehicleService->getModelsByMarkId($markId);
+
+        return \response()->json([
+           'data' => $modelsList
+        ]);
+    }
 }
