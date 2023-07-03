@@ -1,0 +1,339 @@
+{
+	"info": {
+		"_postman_id": "74f39278-622c-4a01-9ae0-6caa18ff1309",
+		"name": "Wezom",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17178297"
+	},
+	"item": [
+		{
+			"name": "Store",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Mark\",\n    \"state_number\": \"GHdfg456\",\n    \"color\": \"red\",\n    \"vin_code\": \"3VWDP7AJ7DM356782\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/v{{api_version}}/vehicles",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v{{api_version}}",
+						"vehicles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/v{{api_version}}/vehicles/1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v{{api_version}}",
+						"vehicles",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Mark 2\",\n    \"state_number\": \"BMffd3X\",\n    \"color\": \"blu\",\n    \"vin_code\": \"1FMCU9J94FUA44289\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/v{{api_version}}/vehicles/9",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v{{api_version}}",
+						"vehicles",
+						"9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/v{{api_version}}/vehicles/7",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v{{api_version}}",
+						"vehicles",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Vehicles",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/v{{api_version}}/vehicles?search=3FA6P0VP1HR282209",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v{{api_version}}",
+						"vehicles"
+					],
+					"query": [
+						{
+							"key": "brand",
+							"value": "ford",
+							"disabled": true
+						},
+						{
+							"key": "model",
+							"value": "Jetta",
+							"disabled": true
+						},
+						{
+							"key": "year",
+							"value": "2017",
+							"disabled": true
+						},
+						{
+							"key": "sort_by",
+							"value": "model",
+							"disabled": true
+						},
+						{
+							"key": "sort_order",
+							"value": "desc",
+							"disabled": true
+						},
+						{
+							"key": "search",
+							"value": "3FA6P0VP1HR282209"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Export Vehicles",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/v{{api_version}}/export/vehicles",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v{{api_version}}",
+						"export",
+						"vehicles"
+					],
+					"query": [
+						{
+							"key": "brand",
+							"value": "ford",
+							"disabled": true
+						},
+						{
+							"key": "model",
+							"value": "Jetta",
+							"disabled": true
+						},
+						{
+							"key": "year",
+							"value": "2017",
+							"disabled": true
+						},
+						{
+							"key": "sort_by",
+							"value": "model",
+							"disabled": true
+						},
+						{
+							"key": "sort_order",
+							"value": "desc",
+							"disabled": true
+						},
+						{
+							"key": "search",
+							"value": "3FA6P0VP1HR282209",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Models By MarkId",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/v{{api_version}}/vehicles/get-models-by-mark-id/1288",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v{{api_version}}",
+						"vehicles",
+						"get-models-by-mark-id",
+						"1288"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://127.0.0.1",
+			"type": "string"
+		},
+		{
+			"key": "api_version",
+			"value": "1",
+			"type": "string"
+		}
+	]
+}
