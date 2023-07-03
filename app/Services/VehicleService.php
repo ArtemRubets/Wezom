@@ -4,17 +4,18 @@ namespace App\Services;
 
 use App\DataTransfers\API\v1\VehicleByVinDTO;
 use App\Models\Vehicle;
+use App\Services\Factories\VehicleAPIFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
 class VehicleService
 {
-    public function __construct(private VehicleAPIService $vehicleAPIService){}
+    public function __construct(private VehicleAPIFactory $vehicleAPIFactory){}
 
     public function storeVehicle(array $data): Vehicle
     {
-        $vehicleByVIN = $this->vehicleAPIService->decodeVIN($data['vin_code']);
+        $vehicleByVIN = $this->vehicleAPIFactory->make()->decodeVIN($data['vin_code']);
 
         $dto = VehicleByVinDTO::toArray($vehicleByVIN);
 
@@ -28,7 +29,7 @@ class VehicleService
         $dto = [];
 
         if ($vehicle->vin_code !== $data['vin_code']){
-            $vehicleByVIN = $this->vehicleAPIService->decodeVIN($data['vin_code']);
+            $vehicleByVIN = $this->vehicleAPIFactory->make()->decodeVIN($data['vin_code']);
 
             $dto = VehicleByVinDTO::toArray($vehicleByVIN);
         }
@@ -56,6 +57,6 @@ class VehicleService
 
     public function getModelsByMarkId(int $markId): Collection
     {
-        return collect($this->vehicleAPIService->getAllModelsByBrandId($markId)['Results']);
+        return collect($this->vehicleAPIFactory->make()->getAllModelsByBrandId($markId)['Results']);
     }
 }

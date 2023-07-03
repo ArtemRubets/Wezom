@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands\API\v1;
 
-use App\Services\VehicleAPIService;
+use App\Services\Factories\VehicleAPIFactory;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -26,9 +26,9 @@ class UpdateAllBrandsAndModels extends Command
     /**
      * Execute the console command.
      */
-    public function handle(VehicleAPIService $vehicleAPIService)
+    public function handle(VehicleAPIFactory $vehicleAPIFactory)
     {
-        $allBrandsRaw = $vehicleAPIService->getAllBrands();
+        $allBrandsRaw = $vehicleAPIFactory->make()->getAllBrands();
         $allBrands = collect($allBrandsRaw['Results']);
 
         $start = microtime(true);
@@ -44,9 +44,9 @@ class UpdateAllBrandsAndModels extends Command
             });
         });
 
-        DB::table('vehicle_brands')->pluck('make_id')->chunk(200)->each(function (Collection $chuck) use ($vehicleAPIService) {
-            $chuck->each(function (int $id) use ($vehicleAPIService) {
-                $allModelsByBrandRaw = $vehicleAPIService->getAllModelsByBrandId($id);
+        DB::table('vehicle_brands')->pluck('make_id')->chunk(200)->each(function (Collection $chuck) use ($vehicleAPIFactory) {
+            $chuck->each(function (int $id) use ($vehicleAPIFactory) {
+                $allModelsByBrandRaw = $vehicleAPIFactory->make()->getAllModelsByBrandId($id);
                 $allModelsByBrand = collect($allModelsByBrandRaw['Results']);
 
                 $allModelsByBrand->each(function (array $model){
