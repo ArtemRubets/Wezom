@@ -19,6 +19,20 @@ class VehicleAPIService
         ], $params))->json();
     }
 
+    public function getAllBrands(array $params = []): array
+    {
+        return $this->getRequest("/vehicles/getallmakes", array_merge([
+            'format' => 'json'
+        ], $params))->json();
+    }
+
+    public function getAllModelsByBrandId(int $brandId, array $params = []): array
+    {
+        return $this->getRequest("/vehicles/getmodelsformakeid/$brandId", array_merge([
+            'format' => 'json'
+        ], $params))->json();
+    }
+
     public function errorHandler(array $response): array
     {
         if ($response['Results'][0]['ErrorCode'] != 0){
